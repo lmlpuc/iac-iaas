@@ -8,7 +8,7 @@ steps:
 - task: AzureResourceGroupDeployment@2
   displayName: 'Deploy Azure Web Infrastructure'
   inputs:
-    azureResourceManagerConnection: 'ar01com'
+    azureResourceManagerConnection: 'ARMPipelineConnection'
     resourceGroupName: 'rg-iac-web00001'
     location: 'westus3'
     templateLocation: 'Linked artifact'
@@ -19,7 +19,7 @@ steps:
 - task: AzurePowerShell@5
   displayName: 'Copy HTML to VM'
   inputs:
-    azureSubscription: 'ar01com'
+    azureSubscription: 'ARMPipelineConnection'
     ScriptType: 'InlineScript'
     InlineScript: |
       $resourceGroupName = 'rg-iac-web00001'
