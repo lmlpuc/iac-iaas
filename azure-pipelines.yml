@@ -8,7 +8,7 @@ steps:
 - task: AzureResourceGroupDeployment@2
   displayName: 'Deploy Azure Web Infrastructure'
   inputs:
-    azureResourceManagerConnection: 'ARMPipelineConnection'
+    azureResourceManagerConnection: 'lmlpuc01'
     resourceGroupName: 'rg-iac-web00001'
     location: 'westus3'
     templateLocation: 'Linked artifact'
@@ -19,7 +19,7 @@ steps:
 - task: AzurePowerShell@5
   displayName: 'Copy HTML to VM'
   inputs:
-    azureSubscription: 'ARMPipelineConnection'
+    azureSubscription: 'ar01com'
     ScriptType: 'InlineScript'
     InlineScript: |
       $resourceGroupName = 'rg-iac-web00001'
@@ -32,6 +32,3 @@ steps:
 
       # Copy file to VM
       Invoke-AzVMRunCommand -ResourceGroupName $resourceGroupName -VMName $vmName -CommandId 'RunPowerShellScript' -ScriptPath $localFilePath -Parameter @{ 'Destination' = $remoteFilePath }
-
-
-
