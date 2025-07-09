@@ -1,0 +1,41 @@
+
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "resourceGroupName": {
+            "value": "rg-iac-web00001"
+        },
+        "location": {
+            "value": "westus3"
+        },
+        "virtualMachineName": {
+            "value": "vm-iac-web00001"
+        },
+        "adminUsername": {
+            "value": "adminwebmanual"
+        },
+        "adminPassword": {
+            "value": "adminwebmanual1!o"
+        },
+        "networkInterfaceName": {
+            "value": "nic-iac-web00001"
+        },
+        "publicIpAddressName": {
+            "value": "pip-iac-web00001"
+        },
+        "virtualNetworkName": {
+            "value": "net-iac-web00001"
+        },
+        "subnetName": {
+            "value": "nset-iac-web00001"
+        },
+        "virtualNetworkAddressPrefix": {
+            "value": "10.0.0.0/16"
+        },
+        "subnetAddressPrefix": {
+            "value": "10.0.0.0/24"
+        }
+    }
+}
+

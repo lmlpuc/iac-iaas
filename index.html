@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Primeiro Website no Azure (IaC + CI/CD - IaaS)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h1 {
+            color: #0056b3;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Bem-vindo ao Meu Website Hosteado no Azure!</h1>
+        <p>Esta é uma página de exemplo simples, publicada via IaC e CI/CD em um servidor Windows IaaS.</p>
+        <p>O poder da automação ponta a ponta!</p>
+        <img src="https://learn.microsoft.com/en-us/azure/architecture/icons/images/real-time-analytics.png" alt="Azure Logo">
+        <p>Data e Hora do Deployment: <span id="datetime"></span></p>
+    </div>
+
+    <script>
+        var dt = new Date();
+        document.getElementById("datetime").innerHTML = dt.toLocaleString();
+    </script>
+</body>
+</html>

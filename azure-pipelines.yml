@@ -1,0 +1,37 @@
+trigger:
+- main
+
+pool:
+  vmImage: 'windows-latest'
+
+steps:
+- task: AzureResourceGroupDeployment@2
+  displayName: 'Deploy Azure Web Infrastructure'
+  inputs:
+    azureResourceManagerConnection: 'ar01com'
+    resourceGroupName: 'rg-iac-web00001'
+    location: 'westus3'
+    templateLocation: 'Linked artifact'
+    csmFile: 'azuredeploy.json'
+    csmParametersFile: 'azuredeploy.parameters.json'
+    overrideParameters: '-virtualMachineName vm-iac-web00001 -adminUsername adminwebmanual -adminPassword adminwebmanual1!o -networkInterfaceName nic-iac-web00001 -publicIpAddressName pip-iac-web00001 -virtualNetworkName net-iac-web00001 -subnetName nset-iac-web00001'
+
+- task: AzurePowerShell@5
+  displayName: 'Copy HTML to VM'
+  inputs:
+    azureSubscription: 'ar01com'
+    ScriptType: 'InlineScript'
+    InlineScript: |
+      $resourceGroupName = 'rg-iac-web00001'
+      $vmName = 'vm-iac-web00001'
+      $localFilePath = '$(System.DefaultWorkingDirectory)/index.html'
+      $remoteFilePath = 'C:\inetpub\wwwroot\index.html'
+
+      # Get VM Public IP
+      $publicIp = (Get-AzPublicIpAddress -ResourceGroupName $resourceGroupName | Where-Object {$_.IpConfiguration.Id -like "*${vmName}*"}).IpAddress
+
+      # Copy file to VM
+      Invoke-AzVMRunCommand -ResourceGroupName $resourceGroupName -VMName $vmName -CommandId 'RunPowerShellScript' -ScriptPath $localFilePath -Parameter @{ 'Destination' = $remoteFilePath }
+
+
+
